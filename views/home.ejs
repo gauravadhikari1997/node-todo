@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container pt-4">
+      <h1 class="text-center">NodeJS Todo App</h1>
+      <form class="form-inline pt-4 " action="/create-todo" method="post">
+        <input
+          autoFocus
+          type="text"
+          name="name"
+          class="form-control "
+          id="email"
+          placeholder="Enter new task.."
+          required
+        />
+        &nbsp;
+        <button type="submit" class="btn btn-primary btn-sm ">
+          Add
+        </button>
+      </form>
+      <div class="row pt-4">
+        <div class="col-6 " style="background-color:lavenderblush;">
+          <h4 class="pt-2">Incomplete Todos</h4>
+          <ul class="list-unstyled pt-4">
+            <% for(let i of todos){ %>
+              <% if(!i.completed){ %>
+
+              <li><%= i.name %> created at <%= i.createdAt %>&nbsp;<a class="btn btn-sm btn-outline-success py-0"
+              style="font-size: 0.8em;" href="/completed/?id=<%= i._id %>">Done</a></li>
+            <% }} %>
+          </ul>
+        </div>
+        <div class="col-6" style="background-color:lavender;">
+          <h4 class="pt-2">Completed Todos</h4>
+          <ul class="list-unstyled pt-4">
+            <% for(let i of todos){ %>
+              <% if(i.completed){ %>
+              <li><del><%= i.name %> created at <%= i.createdAt %></del>&nbsp;<a class="btn btn-sm btn-outline-danger py-0"
+              style="font-size: 0.8em;" href="/delete/?id=<%= i._id %>">Delete</a></li>
+            <% }} %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
